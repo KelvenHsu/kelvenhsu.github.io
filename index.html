@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="zh-CN" id="bgimg">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width" />
+<title>Kelven欢迎你</title>
+<meta name="description" content="网页引导页-">
+<meta name="keywords" content="网页引导页-">
+<link rel="shortcut icon" type="image/x-icon" href="./src/icon.png">
+<link rel="stylesheet" type="text/css" href="https://www.bootcss.com/p/buttons/css/buttons.css">
+<link rel="stylesheet" type="text/css" href="https://www.bootcss.com/p/buttons/css/showcase.css">
+<link type="text/css" rel="stylesheet" href="style.css" />
+<meta name="referrer" content="no-referrer" />
+<div style="text-align:center;clear:both">
+</div>
+<div class="tooltips">
+<span>
+<iframe src="https://music.163.com/outchain/player?type=0&id=3052064923&auto=1&height=280" width=330 height="300" frameborder="no" marginwidth="0" marginheight="0"></iframe>
+</span>
+</div>
+</head>
+<body onload="showTime()">
+<div id="top">
+<main id="top_main">
+<div id="top_logo"><img src="/src/tx2.png" onmouseover="mouseOver()" onmouseout="mouseOut()" id="mainimg"></div>
+
+<div id="clock" style="font-size: 48px; text-align: center; margin-top: 0%;color: white;"></div>
+
+<div id="top_title"><img id="top_title01" alt="" src="./src/logo.gif">
+<br class="top_hr_style01">
+</div>
+<div class="showcase-examples l-over l-center">
+  <a href="./zhuye.html" title="未填写" class="button button-rounded button-plain button-small-caps button-border" target="_blank" >Kelven网站首页</a>
+  <a href="./zhuye.html" title="未填写" class="button button-rounded button-plain button-small-caps button-border" target="_blank">Kelven个人主页</a>
+  <a href="./blog.html" title="未填写" class="button button-rounded button-plain button-small-caps button-border" target="_blank">Kelven个人BLOG</a>
+ <a href="./daohang.html" title="未填写" class="button button-rounded button-plain button-small-caps button-border"target="_blank" >Kelven导航</a>
+  <a href="./yunpan.html" title="未填写" class="button button-rounded button-plain button-small-caps button-border"target="_blank" >Kelven云盘</a>
+  <a href="./kongjian.html" title="未填写" class="button button-rounded button-plain button-small-caps button-border"target="_blank" >Kelven空间</a>
+
+
+  </div>
+</main>
+</div>
+<footer id="top_footer">
+<span id="top_copyright">
+<hr class="top_hr_style02">
+(°ˊДˋ°)つ友情链接：<a href="https://link3.cc/xwq3367/">Kelven导航工具</a>
+<hr class="top_hr_style02">
+<a href="https://kelvenhsu.github.io">KelvenHsu</a> copyright © 2020 All Rights Reserved. <a href=""></a>
+<hr class="top_hr_style02">
+网站已运行：<span id="runtime">加载中...</span>
+</span>
+</footer>
+
+</body>
+
+<script>
+// 设置网站上线时间（年, 月, 日, 时, 分, 秒）——注意：JavaScript 月份从 0 开始（0 = 一月）
+const startTime = new Date("2020-01-01 00:00:00").getTime();
+
+function updateRuntime() {
+    const now = new Date().getTime();
+    let diff = now - startTime; // 时间差（毫秒）
+ 
+    if (diff < 0) {
+        document.getElementById("runtime").innerHTML  = "尚未上线";
+        return;
+    }
+ 
+    // 计算年、天、小时、分钟、秒
+    const msPerSecond = 1000;
+    const msPerMinute = 60 * 1000;
+    const msPerHour = 60 * 60 * 1000;
+    const msPerDay = 24 * 60 * 60 * 1000;
+    const msPerYear = 365.25 * msPerDay;
+ 
+    let years = Math.floor(diff  / msPerYear);
+    diff -= years * msPerYear;
+ 
+    let days = Math.floor(diff  / msPerDay);
+    diff -= days * msPerDay;
+ 
+    let hours = Math.floor(diff  / msPerHour);
+    diff -= hours * msPerHour;
+ 
+    let minutes = Math.floor(diff  / msPerMinute);
+    diff -= minutes * msPerMinute;
+ 
+    let seconds = Math.floor(diff  / msPerSecond);
+ 
+    // 显示结果 
+    let runtimeText = "";
+    if (years > 0) runtimeText += `${years} 年 `;
+    if (days > 0) runtimeText += `${days} 天 `;
+    runtimeText += `${hours} 小时 ${minutes} 分 ${seconds} 秒`;
+ 
+    document.getElementById("runtime").innerHTML  = runtimeText;
+}
+ 
+// 每秒更新一次
+setInterval(updateRuntime, 1000);
+updateRuntime(); // 页面加载后立即执行一次
+</script>
+
+<script>
+	function mouseOver(){
+		document.getElementById("mainimg").src="src/tx.png";//鼠标悬浮时的旋转图标
+	}
+	function mouseOut()
+	{
+		document.getElementById('mainimg').src ="src/tx2.png"//默认的旋转图标
+	}
+</script>
+
+<script>
+function showTime(){
+    var date = new Date();
+    var h = date.getHours();
+    var m = date.getMinutes();
+    var s = date.getSeconds();
+    if(h<10) h = "0"+h;
+    if(m<10) m = "0"+m;
+    if(s<10) s = "0"+s;
+    document.getElementById("clock").innerHTML = h + ":" + m + ":" + s;
+    setTimeout(showTime, 1000);
+}
+</script>
+
+<script type="text/javascript">
+	function change(){
+		var bodyBgs = [];
+bodyBgs[1] = "https://img.meituan.net/csc/5720ab220f2ee2bcaee9be6a789577b66793694.jpg";
+bodyBgs[2] = "https://img.meituan.net/csc/bc6f235bd928595d53d39cc6cc68c4e1631072.jpg";
+bodyBgs[3] = "https://img.meituan.net/csc/d5b9662d74c13b86dc6291bd3511c1bd1128227.jpg";
+bodyBgs[4] = "https://img.meituan.net/csc/61ea3b9b53ef501cdcff4f734586fd392176957.jpg";
+bodyBgs[5] = "https://img.meituan.net/csc/cc5b6a7c94e31cfd85b7a08dd44cce411279670.jpg";
+bodyBgs[6] = "https://img.meituan.net/csc/4ce4af6725c2625ed67b1238e55bd2ad636538.jpg";
+bodyBgs[7] = "https://img.meituan.net/csc/a6ea7ea344656aac5f5e11af7d67bc932135804.jpg";
+bodyBgs[8] = "https://img.meituan.net/csc/e78f8c7e80365817d1c9a231920cc62d1026202.jpg";
+bodyBgs[9] = "https://img.meituan.net/csc/d363a5769034a393c3842e6378dd6ade934940.jpg";
+bodyBgs[10] = "https://img.meituan.net/csc/f2954db9889605a981eb66646e85ef26307393.jpg";
+bodyBgs[11] = "https://img.meituan.net/csc/d54ce01f950afc1997877160f3ea52371338934.jpg";
+bodyBgs[12] = "https://img.meituan.net/csc/3f4482fdb08cc7194438b02d8c939bcc1057303.jpg";
+		var randomBgIndex = Math.round( Math.random() * 12 );
+		var img1= document.getElementById('bgimg');
+		img1.style.backgroundImage='url(' + bodyBgs[randomBgIndex] + ')';
+	        window.setTimeout(function(){change()},10000);
+	}
+	change();
+</script>
+<script type="text/javascript" src="src/snow.min.js"></script>        
+<script type="text/javascript">
+createSnow('src/', 60);
+</script>
+</html>

@@ -1,58 +1,321 @@
-<!DOCTYPE html>  
-<html lang="zh">  
-<head>  
-    <meta charset="UTF-8">  
-    <title>Kelven欢迎你</title>
-    <link rel="shortcut icon" type="image/x-icon" href="src/icon.png">
-    <style>  
-        body {  
-            text-align: center; /* Center align all the content in the body */  
-            margin-left: -13em; /* Shift the content to the left by thirteen em units */  
-        }  
-        h1 {  
-            font-size: 60px;  
-            margin-left: 3.5em;  
-            color: blue;  
-        }  
-        ul {  
-            list-style-type: none;  
-        }  
-        li {  
-            font-size: 45px;  
-            margin-left: 4em;  
-            color: green;  
-        }  
-        a {  
-            color: red; /* Change link font color to red */  
-        }  
-        /* Add the following CSS to change the text color to orange */  
-        .orange-text {  
-            color: orange;  
-        }  
-        /* Add the following CSS to change the text color to green */  
-        .green-text {  
-            color: green;  
-        }  
-    </style>  
-</head>  
-<body style="
-  background-image: url('src/bg.jpg');
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-  min-height: 100vh;
-  margin: 0;
-">
-    <h1>  
-        <iframe src="src/tx2.png" width="290" height="290" frameborder="no"></iframe>   
-        <br/>  
-        <span class="orange-text">kelven空间合集</span>  
-    </h1>  
-    <ul>  
-         <li><a href="http://xwq3367.3vhost.work/" target="_blank"><span class="green-text">http://xwq3367.3vhost.work/</span></a></li>  
-        
-        
-    </ul>  
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>kelven代码空间合集</title>
+<link rel="shortcut icon" type="image/x-icon" href="src/icon.png">
+<style>
+/* ===== 设计变量：深色科技感配色体系 ===== */
+:root{
+  --bg-0:#04060d;
+  --bg-1:#0a1222;
+  --cyan:#22d3ee;
+  --blue:#3d7bff;
+  --violet:#7c5cff;
+  --txt:#e3f2ff;
+  --txt-dim:#8fb0d6;
+  --line:rgba(140,200,255,.16);
+  --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,"Liberation Mono",monospace;
+  --sans:"PingFang SC","HarmonyOS Sans SC","Microsoft YaHei",system-ui,-apple-system,"Segoe UI",sans-serif;
+}
 
-</body>  
+*{box-sizing:border-box;margin:0;padding:0}
+
+html,body{height:100%}
+
+body{
+  font-family:var(--sans);
+  color:var(--txt);
+  background:var(--bg-0);
+  overflow-x:hidden;
+}
+
+/* ===== 背景层（独立装饰层，不参与正文布局） ===== */
+.bg{position:fixed;inset:0;z-index:0;overflow:hidden;background:
+  radial-gradient(1200px 700px at 50% -10%,#12203f 0%,rgba(18,32,63,0) 60%),
+  linear-gradient(180deg,var(--bg-1) 0%,var(--bg-0) 55%,#05081a 100%);}
+
+/* 电路板纹理图片层（左上角） */
+.bg-circuit{position:absolute;top:-90px;left:-120px;width:860px;height:700px;
+  background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%27760%27%20height%3D%27620%27%20viewBox%3D%270%200%20760%20620%27%20fill%3D%27none%27%3E%3Cg%20stroke%3D%27%2322d3ee%27%20stroke-opacity%3D%27.10%27%20stroke-width%3D%271.5%27%3E%3Cpath%20d%3D%27M40%2060h140v90h70M40%2060V30h220%27%2F%3E%3Cpath%20d%3D%27M120%20150v70h60M250%20150v40h80%27%2F%3E%3Cpath%20d%3D%27M300%2030h120v60h90M420%2090v40h70%27%2F%3E%3Cpath%20d%3D%27M520%20150h60v80h90M580%20230v50h60%27%2F%3E%3Cpath%20d%3D%27M40%20260h90v70h120M130%20330v60h60%27%2F%3E%3Cpath%20d%3D%27M280%20300h100v60h90M380%20360v40h70%27%2F%3E%3Cpath%20d%3D%27M520%20300h50v50h110M570%20350v60h40%27%2F%3E%3Cpath%20d%3D%27M640%2060h80v80h40M720%20140v80h0%27%2F%3E%3C%2Fg%3E%3Cg%20fill%3D%27%2322d3ee%27%20fill-opacity%3D%27.28%27%3E%3Ccircle%20cx%3D%27180%27%20cy%3D%27150%27%20r%3D%274%27%2F%3E%3Ccircle%20cx%3D%27310%27%20cy%3D%27150%27%20r%3D%273%27%2F%3E%3Ccircle%20cx%3D%27420%27%20cy%3D%27130%27%20r%3D%274%27%2F%3E%3Ccircle%20cx%3D%27580%27%20cy%3D%27230%27%20r%3D%273.5%27%2F%3E%3Ccircle%20cx%3D%27130%27%20cy%3D%27330%27%20r%3D%274%27%2F%3E%3Ccircle%20cx%3D%27380%27%20cy%3D%27360%27%20r%3D%273%27%2F%3E%3Ccircle%20cx%3D%27640%27%20cy%3D%27350%27%20r%3D%274%27%2F%3E%3Ccircle%20cx%3D%27680%27%20cy%3D%27140%27%20r%3D%273%27%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");
+  background-repeat:no-repeat;background-size:contain;
+  opacity:.9;transform:rotate(-8deg);}
+.bg-circuit.b2{top:auto;left:auto;right:-160px;bottom:-120px;transform:rotate(150deg) scaleX(-1);opacity:.6;}
+
+/* 网格线层 */
+.bg-grid{position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(120,180,255,.055) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(120,180,255,.055) 1px,transparent 1px);
+  background-size:64px 64px;
+  -webkit-mask-image:radial-gradient(115% 90% at 50% 40%,#000 30%,transparent 100%);
+          mask-image:radial-gradient(115% 90% at 50% 40%,#000 30%,transparent 100%);}
+
+/* 光晕层 */
+.bg-glow{position:absolute;border-radius:50%;filter:blur(70px);pointer-events:none;}
+.g1{width:520px;height:520px;left:-140px;top:-120px;background:rgba(34,211,238,.14);}
+.g2{width:620px;height:620px;right:-180px;bottom:-160px;background:rgba(61,123,255,.15);}
+.g3{width:420px;height:420px;left:50%;top:32%;margin-left:-210px;background:rgba(124,92,255,.07);}
+
+/* 粒子画布 */
+#particles{position:absolute;inset:0;width:100%;height:100%;}
+
+/* ===== 主内容 ===== */
+.page{position:relative;z-index:2;min-height:100vh;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:clamp(22px,4.5vh,46px);padding:44px 20px 56px;}
+
+/* 标题：置顶居中，全字渐变 + 发光；鼠标悬停文字高亮 */
+.title{
+  font-size:clamp(32px,5vw,56px);
+  font-weight:700;
+  letter-spacing:.14em;
+  text-align:center;
+  line-height:1.25;
+  background:linear-gradient(180deg,#ffffff 15%,#a8ecff 55%,#3d7bff 100%);
+  -webkit-background-clip:text;background-clip:text;
+  color:transparent;
+  filter:drop-shadow(0 0 22px rgba(34,211,238,.32));
+  transition:filter .3s ease,transform .3s ease;
+  animation:dropIn .7s cubic-bezier(.22,.9,.35,1) both;
+}
+.title:hover{
+  background:linear-gradient(180deg,#ffffff 0%,#e0f9ff 45%,#9fd4ff 100%);
+  -webkit-background-clip:text;background-clip:text;
+  color:transparent;
+  filter:drop-shadow(0 0 34px rgba(34,211,238,.65));
+  transform:scale(1.03);
+}
+.title small{
+  display:block;
+  font-family:var(--mono);
+  font-size:clamp(11px,1.4vw,13px);
+  font-weight:500;
+  letter-spacing:.5em;
+  color:rgba(143,176,214,.65);
+  margin-top:10px;
+  -webkit-text-fill-color:currentColor;
+}
+
+.divider{width:min(180px,44vw);height:2px;border-radius:2px;
+  background:linear-gradient(90deg,transparent,rgba(34,211,238,.75),transparent);
+  box-shadow:0 0 14px rgba(34,211,238,.45);
+  animation:dropIn .7s .18s cubic-bezier(.22,.9,.35,1) both;}
+
+/* 舞台：桌面端绝对定位左右错落，窄屏纵向堆叠 */
+.stage{position:relative;width:100%;}
+
+.logo-box{position:relative;display:flex;justify-content:center;width:fit-content;margin:0 auto;}
+.logo-core{position:relative;display:flex;animation:zoomIn .8s .3s cubic-bezier(.22,.9,.35,1) both;}
+.logo-ring{position:absolute;inset:-20px;border:1px dashed rgba(34,211,238,.45);border-radius:50%;
+  animation:spin 26s linear infinite;}
+.logo-ring.r2{inset:-42px;border:1px solid rgba(61,123,255,.22);border-radius:50%;
+  animation:spin 42s linear infinite reverse;}
+.logo-core img{width:clamp(168px,21vw,224px);height:clamp(168px,21vw,224px);
+  border-radius:50%;object-fit:cover;
+  border:2px solid rgba(34,211,238,.4);
+  box-shadow:0 0 34px rgba(34,211,238,.32),0 0 90px rgba(61,123,255,.22);
+  background:#0a1222;}
+
+/* 网址链接卡片 */
+.link-col{display:flex;flex-direction:column;gap:16px;}
+.link-card{
+  position:relative;display:flex;align-items:center;gap:12px;
+  width:min(360px,90vw);
+  min-height:54px;padding:12px 18px;
+  font-family:var(--mono);
+  font-size:clamp(13px,1.35vw,15px);
+  letter-spacing:.02em;
+  color:var(--txt-dim);
+  text-decoration:none;
+  border:1px solid var(--line);
+  border-radius:12px;
+  background:linear-gradient(135deg,rgba(16,32,58,.72),rgba(8,14,30,.55));
+  box-shadow:0 8px 20px rgba(2,6,16,.4);
+  transition:transform .22s ease,border-color .22s ease,color .22s ease,box-shadow .22s ease,background .22s ease;
+  animation:rise .6s both;
+}
+/* 角落 L 型科技角标 */
+.link-card::before,.link-card::after{
+  content:"";position:absolute;width:11px;height:11px;
+  border:1.5px solid rgba(34,211,238,.65);pointer-events:none;transition:width .22s ease,height .22s ease;}
+.link-card::before{top:5px;left:5px;border-right:none;border-bottom:none;border-top-left-radius:4px;}
+.link-card::after{bottom:5px;right:5px;border-left:none;border-top:none;border-bottom-right-radius:4px;}
+.link-card:hover{
+  transform:translateY(-3px);
+  color:#eafcff;
+  border-color:rgba(34,211,238,.65);
+  background:linear-gradient(135deg,rgba(20,42,76,.85),rgba(9,16,34,.7));
+  box-shadow:0 0 26px rgba(34,211,238,.26),0 12px 26px rgba(2,6,16,.5),inset 0 0 14px rgba(34,211,238,.05);}
+.link-card:hover::before,.link-card:hover::after{width:16px;height:16px;}
+.link-card:focus-visible{outline:2px solid var(--cyan);outline-offset:3px;}
+.link-card .chev{flex:none;width:16px;height:16px;opacity:.7;transition:transform .22s ease,opacity .22s ease;}
+.link-card:hover .chev{opacity:1;transform:translateX(3px);}
+.link-card .txt{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+
+/* ===== 桌面端（≥1280px）：左右两列对称错落 ===== */
+@media (min-width:1280px){
+  .stage{height:560px;}
+  .logo-box{position:absolute;left:50%;top:152px;transform:translateX(-50%);}
+  .link-col{position:absolute;top:0;}
+  .link-col.left{left:max(40px,7vw);align-items:flex-start;}
+  .link-col.right{right:max(40px,7vw);align-items:flex-end;}
+  .link-col.left{top:14px;}
+  .link-col.right{top:78px;}
+  .link-col a{width:min(360px,32vw);}
+  .link-col.left a:nth-child(2){margin-top:110px;}
+  .link-col.left a:nth-child(3){margin-top:110px;}
+  .link-col.right a:nth-child(2){margin-top:110px;}
+  .link-col.right a:nth-child(3){margin-top:110px;}
+  /* 入场延迟：左右交替渐次出现 */
+  .link-col.left a:nth-child(1){animation-delay:.42s}
+  .link-col.right a:nth-child(1){animation-delay:.5s}
+  .link-col.left a:nth-child(2){animation-delay:.6s}
+  .link-col.right a:nth-child(2){animation-delay:.68s}
+  .link-col.left a:nth-child(3){animation-delay:.78s}
+  .link-col.right a:nth-child(3){animation-delay:.86s}
+}
+
+/* ===== 动效定义 ===== */
+@keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+@keyframes dropIn{from{opacity:0;transform:translateY(-14px)}to{opacity:1;transform:none}}
+@keyframes zoomIn{from{opacity:0;transform:scale(.85)}to{opacity:1;transform:scale(1)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ===== 动效偏好：减弱动效 ===== */
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+}
+
+/* ===== 移动端细节 ===== */
+@media (max-width:480px){
+  .page{gap:20px;padding-top:36px;}
+  .link-card{min-height:50px;}
+}
+
+</style>
+
+</head>
+<body>
+
+<!-- ===== 背景装饰层 ===== -->
+<div class="bg" aria-hidden="true">
+  <div class="bg-circuit"></div>
+  <div class="bg-circuit b2"></div>
+  <div class="bg-grid"></div>
+  <div class="bg-glow g1"></div>
+  <div class="bg-glow g2"></div>
+  <div class="bg-glow g3"></div>
+  <canvas id="particles" aria-hidden="true"></canvas>
+</div>
+
+<!-- ===== 主内容 ===== -->
+<main class="page">
+  <h1 class="title">kelven代码空间合集<small>KELVEN&nbsp;HOME</small></h1>
+  <div class="divider" aria-hidden="true"></div>
+
+  <div class="stage">
+    <div class="logo-box">
+      <div class="logo-core">
+        <span class="logo-ring" aria-hidden="true"></span>
+        <span class="logo-ring r2" aria-hidden="true"></span>
+        <img src="src/tx2.png" alt="Kelven 网站 LOGO">
+      </div>
+    </div>
+
+    <nav class="link-col left" aria-label="左侧网站">
+      <a></a>
+      <a class="link-card" href="http://xwq3367.3vhost.work" target="_blank" rel="noopener">
+        <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="#22d3ee" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        <span class="txt">http://xwq3367.3vhost.work</span>
+      </a>
+    
+    </nav>
+
+    <nav class="link-col right" aria-label="右侧网站">
+      <a></a>
+      <a class="link-card" href="http://kelven.3vzhuji.cn" target="_blank" rel="noopener">
+        <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="#22d3ee" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        <span class="txt">http://kelven.3vzhuji.cn</span>
+      </a>
+      
+    </nav>
+  </div>
+
+<footer>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="25" height="25" style="vertical-align: middle; margin-right: 8px;">
+    <defs>
+      <linearGradient id="footer-logo" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#00e0ff"/>
+        <stop offset="1" stop-color="#3d7bff"/>
+      </linearGradient>
+    </defs>
+    <rect width="64" height="64" rx="14" fill="#060912"/>
+    <path d="M32 9 51 20.5v23L32 55 13 43.5v-23z" fill="none" stroke="url(#footer-logo)" stroke-width="4.5" stroke-linejoin="round"/>
+    <circle cx="32" cy="32" r="7" fill="#00e0ff"/>
+  </svg>
+  <a href="https://kelvenhsu.github.io" style="color: #3d7bff; text-decoration: none; margin: 0 4px;">KelvenHsu</a>
+  copyright &copy; 2020 All Rights Reserved.
+</footer>
+</main>
+
+
+
+<script>
+(function(){
+  /* 粒子系统：少量青蓝光点上浮，营造科技氛围 */
+  var canvas=document.getElementById('particles');
+  var ctx=canvas.getContext('2d');
+  var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var dots=[],W,H,raf;
+
+  function init(){
+    W=canvas.width=window.innerWidth;
+    H=canvas.height=window.innerHeight;
+    var n=Math.min(34,Math.max(14,Math.floor(W*H/52000)));
+    dots=[];
+    var colors=['34,211,238','61,123,255','124,92,255'];
+    for(var i=0;i<n;i++){
+      dots.push({
+        x:Math.random()*W,
+        y:Math.random()*H,
+        r:0.8+Math.random()*1.6,
+        v:0.08+Math.random()*0.24,
+        ph:Math.random()*Math.PI*2,
+        sw:0.12+Math.random()*0.3,
+        c:colors[Math.random()<0.7?0:(Math.random()<0.5?1:2)]
+      });
+    }
+  }
+
+  function tick(){
+    ctx.clearRect(0,0,W,H);
+    for(var i=0;i<dots.length;i++){
+      var d=dots[i];
+      d.y-=d.v;
+      d.ph+=0.006;
+      d.x+=Math.sin(d.ph)*d.sw;
+      if(d.y<-12){d.y=H+12;d.x=Math.random()*W;}
+      if(d.x<-12){d.x=W+12;}
+      if(d.x>W+12){d.x=-12;}
+      var a=0.16+0.3*Math.abs(Math.sin(d.ph));
+      ctx.beginPath();
+      ctx.arc(d.x,d.y,d.r,0,Math.PI*2);
+      ctx.fillStyle='rgba('+d.c+','+a.toFixed(3)+')';
+      ctx.fill();
+    }
+    raf=requestAnimationFrame(tick);
+  }
+
+  init();
+  if(!reduce){tick();}
+  var t;
+  window.addEventListener('resize',function(){
+    clearTimeout(t);t=setTimeout(init,160);
+  });
+})();
+</script>
+
+</body>
 </html>

@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="http://kelven.3vzhuji.cn/xwq/me.jpg" type="image/x-icon">
+    <title>Kelven欢迎你</title>
+    <style>
+        /* 全局去除所有链接下划线 */
+       a {
+            text-decoration: none;
+       }
+        /* 全局基础样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* 默认主题变量（清新白） */
+        :root {
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8f9fa;
+            --text-primary: #212529;
+            --text-secondary: #6c757d;
+            --accent: #4361ee;
+            --border: #e9ecef;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            --card-radius: 12px;
+        }
+
+        /* 主题1：暗夜模式 */
+        .theme-dark {
+            --bg-primary: #121212;
+            --bg-secondary: #1e1e1e;
+            --text-primary: #f8f9fa;
+            --text-secondary: #adb5bd;
+            --accent: #7209b7;
+            --border: #333333;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        /* 主题2：樱花粉 */
+        .theme-sakura {
+            --bg-primary: #fff5f7;
+            --bg-secondary: #ffe4ec;
+            --text-primary: #5a2a38;
+            --text-secondary: #9d5c6e;
+            --accent: #f72585;
+            --border: #ffc2d4;
+            --shadow: 0 4px 20px rgba(247, 37, 133, 0.1);
+        }
+
+        /* 主题3：海洋蓝 */
+        .theme-ocean {
+            --bg-primary: #f0f9ff;
+            --bg-secondary: #e0f2fe;
+            --text-primary: #0c4a6e;
+            --text-secondary: #0369a1;
+            --accent: #0ea5e9;
+            --border: #bae6fd;
+            --shadow: 0 4px 20px rgba(14, 165, 233, 0.12);
+        }
+
+        /* 主题4：森林绿 */
+        .theme-forest {
+            --bg-primary: #f0fdf4;
+            --bg-secondary: #dcfce7;
+            --text-primary: #14532d;
+            --text-secondary: #166534;
+            --accent: #22c55e;
+            --border: #bbf7d0;
+            --shadow: 0 4px 20px rgba(34, 197, 94, 0.12);
+        }
+
+        /* 主题5：赛博朋克 */
+        .theme-cyber {
+            --bg-primary: #0f0f23;
+            --bg-secondary: #1a1a2e;
+            --text-primary: #00ff9d;
+            --text-secondary: #00b8ff;
+            --accent: #ff00ff;
+            --border: #2d2d54;
+            --shadow: 0 0 20px rgba(0, 255, 157, 0.2);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            min-height: 100vh;
+        }
+
+        /* 导航栏 */
+        nav {
+            background-color: var(--bg-secondary);
+            border-bottom: 1px solid var(--border);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .theme-btn {
+            background-color: var(--accent);
+            color: white;
+            border: none;
+            padding: 0.6rem 1.2rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .theme-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        /* 主内容区 */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 1.5rem;
+        }
+
+        .hero {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .hero h1 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--accent), var(--text-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .current-theme {
+            margin-top: 1.5rem;
+            padding: 0.5rem 1rem;
+            background-color: var(--bg-secondary);
+            border-radius: 20px;
+            display: inline-block;
+            font-size: 0.9rem;
+            color: var(--accent);
+            border: 1px solid var(--border);
+        }
+
+        /* 卡片网格 */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 4rem;
+        }
+
+        .card {
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: var(--card-radius);
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+        }
+
+        .card-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.8rem;
+            color: var(--text-primary);
+        }
+
+        .card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        /* 提示区域 */
+        .tip-box {
+            background-color: var(--bg-secondary);
+            border-left: 4px solid var(--accent);
+            padding: 1.5rem 2rem;
+            border-radius: 0 var(--card-radius) var(--card-radius) 0;
+            margin-bottom: 3rem;
+        }
+
+        .tip-box h4 {
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+
+        .tip-box ul {
+            padding-left: 1.5rem;
+            color: var(--text-secondary);
+        }
+
+        .tip-box li {
+            margin: 0.4rem 0;
+        }
+
+        /* 页脚 */
+        footer {
+            text-align: center;
+            padding: 2rem 1.5rem;
+            border-top: 1px solid var(--border);
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* 响应式适配 */
+        @media (max-width: 768px) {
+            .container {
+                padding: 2rem 1rem;
+            }
+            .hero {
+                margin-bottom: 2.5rem;
+            }
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body class="theme-light" onload="showTime()">
+    <!-- 导航栏 -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">🎨 Kelven动态主题网站  <small class="current-theme" id="currentThemeLabel">当前主题：清新白</small></div>
+            
+            <button class="theme-btn" id="changeThemeBtn">🔄 切换主题</button>           
+        </div>
+    </nav>
+
+    <!-- 主内容 -->
+    <main class="container">
+        <section class="hero">
+            <h1>每次进入，都是全新体验</h1>
+            <p>Kelven动态主题网站，每次刷新页面都会自动加载不同的配色主题，你也可以点击右上角按钮手动切换。</p>
+            <br>
+            <div id="clock" class="logo">加载中...</div>
+            <br>
+            <a class="current-theme" href="https://kelvenhsu.github.io">返回网站首页</a>
+        </section>
+        <section class="cards-grid">
+            <a href="shouye.html">   
+            <div class="card">
+                <div class="card-icon">🏡</div>
+                <h3>Kelven网站首页</h3>
+                <p>个人网站首页合集。</p>
+            </div>
+            </a>
+            <a href="zhuye.html"> 
+            <div class="card">
+                <div class="card-icon">📺</div>
+                <h3>Kelven个人主页</h3>
+                <p>个人信息主页合集。</p>
+            </div>
+            </a>
+            <a href="blog.html"> 
+            <div class="card">
+                <div class="card-icon">✨</div>
+                <h3>Kelven个人BLOG</h3>
+                <p>个人博客主页合集。</p>
+            </div>
+            </a>
+            <a href="daohang.html"> 
+            <div class="card">
+                <div class="card-icon">📱</div>
+                <h3>Kelven导航网站</h3>
+                <p>个人导航网站合集。</p>
+            </div>
+            </a>
+            <a href="yunpan.html"> 
+            <div class="card">
+                <div class="card-icon">☁</div>
+                <h3>Kelven自建云盘</h3>
+                <p>个人自建网盘合集。</p>
+            </div>
+            </a>
+            <a href="kongjian.html"> 
+            <div class="card">
+                <div class="card-icon">📻</div>
+                <h3>Kelven代码空间</h3>
+                <p>个人代码空间合集。</p>
+            </div>
+            </a>
+        </section>
+
+        <section class="tip-box">
+            <h4>💡 使用说明</h4>
+            <ul>
+                <li>每次刷新/打开页面，系统会随机选择一套主题自动加载</li>
+                <li>点击右上角「切换主题」按钮，可手动切换到新的随机主题</li>
+                <li>所有样式基于CSS变量实现，你可以轻松新增自定义主题</li>
+                <li>如需固定主题，只需修改body标签的class属性即可</li>
+            </ul>
+        </section>
+    </main>
+    <!-- 页脚 -->
+    <footer>
+        (°ˊДˋ°)つ友情链接：<a href="https://link3.cc/xwq3367/">Kelven | Link3</a>
+        <br>
+        <a href="https://kelvenhsu.github.io">KelvenHsu</a> copyright &copy; 2020 All Rights Reserved. 
+        <div class="" data-astro-cid-aqiath5b="">网站已运行：<span id="runtime">加载中...</span> </div>
+       <iframe src="https://music.163.com/outchain/player?type=0&id=18527048577&auto=1&height=0" width=0 height="0" frameborder="no" marginwidth="0" marginheight="0"></iframe>
+<a href="#top" id="toTop" class="current-theme" style="position: fixed; bottom: 66px; right: 10px; width: 48px; height: 48px; background-image: url(&quot;data:image/svg+xml;base64,PHN2ZyB0PSIxNjU0OTM5MTkxNTY0IiBjbGFzcz0iaWNvbiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjEyMTgiIHdpZHRoPSI0OCIgaGVpZ2h0PSI0OCI+PHBhdGggZD0iTTUxMyAxMDMuN2MtMjI2LjEgMC00MDkuNCAxODMuMy00MDkuNCA0MDkuNFMyODYuOSA5MjIuNiA1MTMgOTIyLjZzNDA5LjQtMTgzLjMgNDA5LjQtNDA5LjRTNzM5LjEgMTAzLjcgNTEzIDEwMy43eiBtMTUzLjUgMzY0LjdjLTUuMiA1LjMtMTIuMSA3LjktMTkgNy45cy0xMy44LTIuNi0xOS03LjlMNTQ1LjEgMzg1YzAgMC40IDAuMSAwLjcgMC4xIDEuMVY3MDVjMCAxMS4xLTUuNyAyMC45LTE0LjQgMjYuNi00LjcgNC4yLTEwLjkgNi43LTE3LjcgNi43LTYuOCAwLTEzLTIuNS0xNy43LTYuNy04LjctNS43LTE0LjQtMTUuNS0xNC40LTI2LjZWMzg2LjFjMC0wLjQgMC0wLjcgMC4xLTEuMWwtODMuNCA4My40Yy0xMC41IDEwLjUtMjcuNSAxMC41LTM4IDBzLTEwLjUtMjcuNSAwLTM4TDQ5NCAyOTUuOWMxMC41LTEwLjUgMjcuNS0xMC41IDM4IDBsMTM0LjUgMTM0LjVjMTAuNSAxMC40IDEwLjUgMjcuNSAwIDM4eiIgZmlsbD0iIzE1NzJlZiIgcC1pZD0iMTIxOSI+PC9wYXRoPjwvc3ZnPg==&quot;); z-index: 999; opacity: 0.9;"></a>
+    </footer>
+
+    <script>
+        // 主题配置列表
+        const themes = [
+            { class: 'theme-light', name: '清新白' },
+            { class: 'theme-dark', name: '暗夜黑' },
+            { class: 'theme-sakura', name: '樱花粉' },
+            { class: 'theme-ocean', name: '海洋蓝' },
+            { class: 'theme-forest', name: '森林绿' },
+            { class: 'theme-cyber', name: '赛博朋克' }
+        ];
+
+        const themeLabel = document.getElementById('currentThemeLabel');
+        const changeBtn = document.getElementById('changeThemeBtn');
+        let currentThemeIndex = 0;
+
+        // 设置随机主题（避免和当前主题重复）
+        function setRandomTheme() {
+            let newIndex;
+            // 随机直到选到和当前不一样的主题
+            do {
+                newIndex = Math.floor(Math.random() * themes.length);
+            } while (newIndex === currentThemeIndex && themes.length > 1);
+            
+            currentThemeIndex = newIndex;
+            const theme = themes[newIndex];
+            
+            // 移除所有主题类
+            document.body.classList.remove(...themes.map(t => t.class));
+            // 添加新主题类
+            document.body.classList.add(theme.class);
+            // 更新提示文字
+            themeLabel.textContent = `当前主题：${theme.name}`;
+        }
+
+        // 页面加载完成时自动设置随机主题
+        document.addEventListener('DOMContentLoaded', setRandomTheme);
+        // 按钮点击切换主题
+        changeBtn.addEventListener('click', setRandomTheme);
+    </script>
+
+<script>
+// 设置网站上线时间（年, 月, 日, 时, 分, 秒）——注意：JavaScript 月份从 0 开始（0 = 一月）
+const startTime = new Date("2020-01-01 00:00:00").getTime();
+
+function updateRuntime() {
+    const now = new Date().getTime();
+    let diff = now - startTime; // 时间差（毫秒）
+ 
+    if (diff < 0) {
+        document.getElementById("runtime").innerHTML  = "尚未上线";
+        return;
+    }
+ 
+    // 计算年、天、小时、分钟、秒
+    const msPerSecond = 1000;
+    const msPerMinute = 60 * 1000;
+    const msPerHour = 60 * 60 * 1000;
+    const msPerDay = 24 * 60 * 60 * 1000;
+    const msPerYear = 365.25 * msPerDay;
+ 
+    let years = Math.floor(diff  / msPerYear);
+    diff -= years * msPerYear;
+ 
+    let days = Math.floor(diff  / msPerDay);
+    diff -= days * msPerDay;
+ 
+    let hours = Math.floor(diff  / msPerHour);
+    diff -= hours * msPerHour;
+ 
+    let minutes = Math.floor(diff  / msPerMinute);
+    diff -= minutes * msPerMinute;
+ 
+    let seconds = Math.floor(diff  / msPerSecond);
+ 
+    // 显示结果 
+    let runtimeText = "";
+    if (years > 0) runtimeText += `${years} 年 `;
+    if (days > 0) runtimeText += `${days} 天 `;
+    runtimeText += `${hours} 小时 ${minutes} 分 ${seconds} 秒`;
+ 
+    document.getElementById("runtime").innerHTML  = runtimeText;
+}
+ 
+// 每秒更新一次
+setInterval(updateRuntime, 1000);
+updateRuntime(); // 页面加载后立即执行一次
+</script>
+
+<script>
+    function showTime(){
+        var date = new Date();
+        var h = date.getHours();
+        var m = date.getMinutes();
+        var s = date.getSeconds();
+        
+        if(h < 10) h = "0" + h;
+        if(m < 10) m = "0" + m;
+        if(s < 10) s = "0" + s;
+        
+        var weekDays = ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"];
+        var week = weekDays[date.getDay()];
+        
+        document.getElementById("clock").innerHTML = h + ":" + m + ":" + s + "  " + week;
+        
+        setTimeout(showTime, 1000);
+    }
+    
+    showTime();
+    </script>
+
+</body>
+</html>

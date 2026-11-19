@@ -27,7 +27,8 @@
 
 <div id="top_logo"><img src="src/tx2.png" onmouseover="mouseOver()" onmouseout="mouseOut()" id="mainimg"> </div>
 
-<div id="clock" style="font-size: 48px; text-align: center; margin-top: 0%;color: white;"></div>
+<div id="time" style="font-size: 48px; text-align: center; margin-top: 0%;color: white;"></div>
+<div id="week" style="font-size: 28px; text-align: center; margin-top: 0%;color: white;"></div>
 
   <div class="showcase-examples l-over l-center">
 
@@ -118,19 +119,31 @@ updateRuntime(); // 页面加载后立即执行一次
 	}
 </script>
 
-<script>
-function showTime(){
-    var date = new Date();
-    var h = date.getHours();
-    var m = date.getMinutes();
-    var s = date.getSeconds();
-    if(h<10) h = "0"+h;
-    if(m<10) m = "0"+m;
-    if(s<10) s = "0"+s;
-    document.getElementById("clock").innerHTML = h + ":" + m + ":" + s;
-    setTimeout(showTime, 1000);
-}
-</script>
+    <script>
+    function showTime(){
+        var date = new Date();
+        var h = date.getHours();
+        var m = date.getMinutes();
+        var s = date.getSeconds();
+        
+        // 补零操作
+        if(h < 10) h = "0" + h;
+        if(m < 10) m = "0" + m;
+        if(s < 10) s = "0" + s;
+        
+        // 获取星期几
+        var weekDays = ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"];
+        var week = weekDays[date.getDay()];
+        
+        // 时间显示在 time 元素，星期显示在 week 元素
+        document.getElementById("time").innerHTML = h + ":" + m + ":" + s;
+        document.getElementById("week").innerHTML = week;
+        
+        setTimeout(showTime, 1000);
+    }
+    
+    showTime();
+    </script>
 
 <script type="text/javascript">
 	function change(){
